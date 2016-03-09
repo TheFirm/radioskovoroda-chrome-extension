@@ -1,20 +1,19 @@
 document.addEventListener('DOMContentLoaded', function(){
 
     var btn        = document.getElementById('btn'),
-        isOn       = chrome.extension.getBackgroundPage().isOn,
         onAirClass = 'on-air';
 
-    if(isOn){
-        btn.classList.add(onAirClass);
-    }
+    if(isOn()) btn.classList.add(onAirClass);
+
+    btn.addEventListener('click', clickHandler);
 
     function clickHandler(){
-        var btnClasses = btn.classList,
-            onAir      = btnClasses.contains(onAirClass);
-        onAir ? btnClasses.remove(onAirClass) : btnClasses.add(onAirClass)
-        chrome.extension.sendMessage('test');
+        isOn() ? btn.classList.remove(onAirClass) : btn.classList.add(onAirClass);
+        return chrome.extension.sendMessage('btn-clicked');
     }
-    
-    btn.addEventListener('click', clickHandler);
+
+    function isOn(){
+        return chrome.extension.getBackgroundPage().isOn;
+    }
 
 });
