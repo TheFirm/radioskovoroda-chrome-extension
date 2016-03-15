@@ -1,4 +1,4 @@
-var isOn   = false;
+var isOn = false;
 
 chrome.runtime.onMessage.addListener(function(msg, sender){
     
