@@ -33,7 +33,7 @@ function triggerRadio(){
 
 function enableRadio(radio){
     chrome.browserAction.setIcon({
-        path: './play-brws.png'
+        path: './pause-brws.png'
     });
 
     radio.play();
