@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
     "name": "Radio Skovoroda",
-    "description": "Brings Radio Skovoroda to you without adirional tab",
-    "version": "0.1",
+    "description": "Brings Radio Skovoroda to you without additional tab",
+    "version": "0.2",
 
     "browser_action": {
         "default_icon": "play-brws.png",
