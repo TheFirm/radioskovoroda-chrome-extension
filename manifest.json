@@ -7,13 +7,16 @@
     "browser_action": {
         "default_icon": "play-brws.png",
         "default_popup": "popup.html",
-        "default_title": "radio-popup"
+        "default_title": "Радіо Сковорода"
     },
     
+    "author"       : "Relevant Software",
+    "homepage_url" : "http://radioskovoroda.com/", 
+
     "background":{
         "page": "background.html",
         "script": "background.js",
-        "persistent": false
+        "persistent": true
     },
 
     "web_accessible_resources": [
@@ -24,9 +27,6 @@
         "http://195.248.234.62:8000/",
         "background",
         "tabs",
-        "notifications",
-        "activeTab",
-        "https://ajax.googleapis.com/",
-        "http://radioskovoroda.com/"
+        "activeTab"
     ]
 }

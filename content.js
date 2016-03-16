@@ -19,14 +19,16 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     });
 
+
     function clickHandler(){
         if(isOn()){
-            btn.classList.remove(onAirClass)
+            btn.classList.remove(onAirClass);
         } else {
-            btn.classList.add(onAirClass)
+            btn.classList.add(onAirClass);
         }
         chrome.extension.sendMessage({msg: 'trigger-radio'});
     }
+
 
     function startTrackDataLoop(interval){
         fetchTrackData();
@@ -35,22 +37,30 @@ document.addEventListener('DOMContentLoaded', function(){
         }, interval);
     }
 
+
     function fetchTrackData(){
         chrome.extension.sendMessage({msg: 'get-track-data'});
     }
+
 
     function isOn(){
         return chrome.extension.getBackgroundPage().isOn;
     }
 
+
     function updateTrack(track){
         track = track || '';
-        if(!track) return hideTrackHolder();
-        $('div.track').show().find('#track-title').html(track);
+        if(!track) {
+            return hideTrackHolder();
+        } else {
+            $('div.track').show().find('#track-title').html(track);
+        }
     }
+
 
     function hideTrackHolder(){
         return $('div.track').hide();
     }
+
 });
 
