@@ -25,7 +25,6 @@
     "permissions": [
         "http://195.248.234.62:8000/",
         "background",
-        "tabs",
         "activeTab"
     ]
 }
