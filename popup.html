@@ -1,6 +1,8 @@
+<link href="styles.css" rel="stylesheet" type="text/css">
 <script src="jquery-1.12.1.min.js"></script>
 <script src="content.js">
 </script>
+
 <style>
     #skovoroda-box, #btn{
         background-image    : url('http://radioskovoroda.com/templates/skovoroda/images/logo-smal.png');
@@ -43,10 +45,19 @@
     }
 
     #track-title{
-        white-spacei  : no-wrap;
+        white-space   : no-wrap;
         text-overflow : eclipse;
         overflow      : hidden ;
     }
+
+    .soc-search{
+        position   : absolute;
+        bottom     : 0;
+        width      : 100%;
+        text-align : center;
+        font-size  : 14px;
+    }
+
 </style>
 
 
@@ -54,6 +65,12 @@
 <div id="skovoroda-box" style="width: 507px; height: 525px;">
     <div id="btn">  </div>
     <div class="track">
-        <div id="track-title"></div>
+        <div id="track-title" class="track-items"></div>
+    </div>
+    <div class="soc-search track-items">
+        <a href="#" target="_blank" class="icon socicon-vkontakte"></a>
+        <a href="#" target="_blank" class="icon socicon-youtube"></a>
+        <a href="#" target="_blank" class="icon socicon-soundcloud"></a>
+        <a href="#" target="_blank" class="icon socicon-deezer"></a>
     </div>
 </div>
