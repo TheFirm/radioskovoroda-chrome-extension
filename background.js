@@ -23,7 +23,7 @@ function messageListener(request, sender, sendResponse){
 function triggerRadio(){
     var stream = document.getElementById('radio-skovoroda');
 
-    if(isOn){
+    if(!isOn){
         enableRadio(stream);
     } else {
         disableRadio(stream);
