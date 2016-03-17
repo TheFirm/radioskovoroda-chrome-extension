@@ -5,6 +5,7 @@ var isOn     = false,
         async : true
     };
 
+setPlayIcon();
 chrome.runtime.onMessage.addListener(messageListener);
 
 
@@ -32,22 +33,30 @@ function triggerRadio(){
 
 
 function enableRadio(radio){
-    chrome.browserAction.setIcon({
-        path: './pause-brws.png'
-    });
-
+    setPauseIcon();
     radio.play();
     isOn = !isOn;
 }
 
 
 function disableRadio(radio){
+    setPlayIcon();
+    radio.pause();
+    isOn = !isOn;
+}
+
+
+function setPauseIcon(){
+    chrome.browserAction.setIcon({
+        path: './pause-brws.png'
+    });
+}
+
+
+function setPlayIcon(){
     chrome.browserAction.setIcon({
         path: './play-brws.png'
     });
-
-    radio.pause();
-    isOn = !isOn;
 }
 
 
@@ -65,12 +74,11 @@ function fetchTrackData(callData, callback){
         }
     }
 
+    function badFetch(){
+        chrome.extension.sendMessage({msg: 'current-track', track: ""});
+    }
+
     return $.ajax(callData).done(trackDataCallback);
-}
-
-
-function badFetch(){
-    chrome.extension.sendMessage({msg: 'current-track', track: ""});
 }
 
 
