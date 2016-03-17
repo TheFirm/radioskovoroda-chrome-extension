@@ -9,6 +9,10 @@
         "default_popup": "popup.html",
         "default_title": "Радіо Сковорода"
     },
+
+    "icons": {
+        "128": "play-brws.png"
+    },
     
     "author"       : "Relevant Software",
 
