@@ -3,10 +3,38 @@ var isOn     = false,
         type  : 'GET',
         url   : 'http://195.248.234.62:8000/json.xsl',
         async : true
-    };
+    },
+    stream = {
+        title: "RadioSkovoroda",
+        mp3: "http://195.248.234.62:8000/radioskovoroda"
+    },
+    ready = false;
 
 setPlayIcon();
 chrome.runtime.onMessage.addListener(messageListener);
+
+jQuery(document).ready(function(){
+    jQuery("body").jPlayer({
+        ready: function (event) {
+            ready = true;
+        },
+        pause: function() {
+            jQuery(this).jPlayer("clearMedia");
+        },
+        error: function(event) {
+            if(ready && event.jPlayer.error.type === jQuery.jPlayer.error.URL_NOT_SET) {
+                // Setup the media stream again and play it.
+                jQuery(this).jPlayer("setMedia", stream).jPlayer("play");
+            }
+        },
+        supplied: "mp3",
+        solution: "html",
+        preload: "none",
+        wmode: "window",
+        keyEnabled: true
+    });
+
+});
 
 
 function messageListener(request, sender, sendResponse){
@@ -20,28 +48,26 @@ function messageListener(request, sender, sendResponse){
     }
 }
 
-
 function triggerRadio(){
-    var stream = document.getElementById('radio-skovoroda');
 
     if(!isOn){
-        enableRadio(stream);
+        enableRadio();
     } else {
-        disableRadio(stream);
+        disableRadio();
     }
 }
 
 
-function enableRadio(radio){
+function enableRadio(){
     setPauseIcon();
-    radio.play();
+    jQuery("body").jPlayer("play");
     isOn = !isOn;
 }
 
 
-function disableRadio(radio){
+function disableRadio(){
     setPlayIcon();
-    radio.pause();
+    jQuery("body").jPlayer("clearMedia");
     isOn = !isOn;
 }
 
@@ -81,9 +107,6 @@ function fetchTrackData(callData, callback){
     return $.ajax(callData).done(trackDataCallback);
 }
 
-
 function parseResp(str){
     return JSON.parse(str.split('parseMusic(')[1].split(');')[0])['/radioskovoroda'];
 }
-
-
