@@ -12,8 +12,10 @@ var isOn     = false,
 
 setPlayIcon();
 chrome.runtime.onMessage.addListener(messageListener);
+jQuery(document).ready(domInit);
 
-jQuery(document).ready(function(){
+
+function domInit(){
     jQuery("body").jPlayer({
         ready: function (event) {
             ready = true;
@@ -23,7 +25,6 @@ jQuery(document).ready(function(){
         },
         error: function(event) {
             if(ready && event.jPlayer.error.type === jQuery.jPlayer.error.URL_NOT_SET) {
-                // Setup the media stream again and play it.
                 jQuery(this).jPlayer("setMedia", stream).jPlayer("play");
             }
         },
@@ -33,9 +34,7 @@ jQuery(document).ready(function(){
         wmode: "window",
         keyEnabled: true
     });
-
-});
-
+}
 
 function messageListener(request, sender, sendResponse){
     switch (request.msg){
@@ -93,7 +92,7 @@ function fetchTrackData(callData, callback){
             return badFetch();
         } else{
             var message = {
-                msg   : 'current-track', 
+                msg   : 'current-track',
                 track : parseResp(data)["title"]
             };
             chrome.extension.sendMessage(message);
