@@ -13,7 +13,9 @@ var isOn     = false,
 setPlayIcon();
 chrome.runtime.onMessage.addListener(messageListener);
 jQuery(document).ready(domInit);
-
+chrome.browserAction.onClicked.addListener(function() {
+    enableRadio();
+});
 
 function domInit(){
     jQuery("body").jPlayer({
@@ -59,6 +61,7 @@ function triggerRadio(){
 
 function enableRadio(){
     setPauseIcon();
+    addPopup();
     jQuery("body").jPlayer("play");
     isOn = !isOn;
 }
@@ -66,8 +69,22 @@ function enableRadio(){
 
 function disableRadio(){
     setPlayIcon();
+    removePopup();
     jQuery("body").jPlayer("clearMedia");
     isOn = !isOn;
+}
+
+function addPopup(){
+    chrome.browserAction.setPopup({
+        popup: 'popup.html'
+    });
+
+}
+
+function removePopup(){
+    chrome.browserAction.setPopup({
+        popup: ''
+    });
 }
 
 

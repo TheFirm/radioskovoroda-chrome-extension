@@ -6,7 +6,6 @@
 
     "browser_action": {
         "default_icon": "play-brws.png",
-        "default_popup": "popup.html",
         "default_title": "Радіо Сковорода"
     },
 
